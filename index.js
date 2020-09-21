@@ -1,6 +1,7 @@
 const app = require('express')();
 const routes = require('./routes');
 const bodyParser = require('body-parser');
+const mongo = require('mongodb').MongoClient;
 
 app.use(bodyParser.json());
 app.use(routes);
