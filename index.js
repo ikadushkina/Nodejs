@@ -1,20 +1,11 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const objectId = require("mongodb").ObjectID;
-
 const app = express();
 const jsonParser = express.json();
 
-
-
-// const app = require('express')();
-// const routes = require('./routes');
-// const bodyParser = require('body-parser');
-// const MongoClient = require('mongodb').MongoClient
-// const jsonParser = app.json();
 const url = 'mongodb://localhost:27017/';
 
-const mongo = new MongoClient("mongodb://localhost:27017/", { useNewUrlParser: true });
+const mongo = new MongoClient(url, { useNewUrlParser: true });
 
 mongo.connect((err, client) => {
 
@@ -48,33 +39,4 @@ app.post('/api/delete', function(req, res){
     const collection = req.app.locals.collection;
     collection.deleteOne({ _id: id});
 });
-// MongoClient.connect(url, (err, client) => {
-//     const db = client.db('Users_DB')
-//     const users = db.collection('Users')
-//     users.find().toArray((err, results) => {
-//         console.log(results);
-//         client.close()
-//     });
-//     // users.insertOne({login: 'Jack', password: '123456', list: [{id: 0, text: 'Test task', isCompleted: true}]})
-//     // users.updateOne({login:'admin'}, {$set: {list: [
-//     //             {
-//     //                 id: 0,
-//     //                 text: 'Create database',
-//     //                 isCompleted: true,
-//     //             },{
-//     //     id: 1,
-//     //                 text: 'Connect MongoDB  with Nodejs',
-//     //                 isCompleted: false,
-//     //             }
-//     //         ] }}, { returnOriginal: false },);
-//
-//     client.close()
-// })
-
-// app.use(bodyParser.json());
-// app.use(routes);
-
-// app.listen(8080, () => {
-//     console.log('Hello, port 8000');
-// });
 
