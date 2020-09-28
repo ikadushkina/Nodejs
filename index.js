@@ -1,17 +1,16 @@
 const express = require("express");
 const app = express();
-const jsonParser = express.json();
-const schema = require('./models/SchemaTodo')
+const routes = require('./routes');
+const models = require('./models');
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+
+app.use(cookieParser('secret key'))
+app.use(bodyParser.json())
 
 
-app.get("/tasks",jsonParser, schema.getTasks);
-app.post("/add",jsonParser, schema.addTask);
-app.post("/delete",jsonParser, schema.deleteTask);
-app.post("/check", jsonParser, schema.checkTask);
+app.use(routes);
 
 app.listen(8000, function () {
     console.log("Сервер ожидает подключения...")
 });
-
-app.use(bodyParser.json())
